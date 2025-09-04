@@ -4,7 +4,7 @@ Günümüzün belki de en çok konuşulan ve ilgi odağı olan yapay zekanın, s
 
 ## Yapay Zeka (AI) Nedir?
 
-![AI Nedir?](/public/blogs/img/siber-güvenlikte-yapay-zeka/AiNedir.png)
+![AI Nedir?](/public/blogs/img/siber-guvenlikte-yapay-zeka/AiNedir.png)
 
 Bir tanım cümlesiyle açıklayacak olursak yapay zeka, makinelerin insana özgü olan düşünme, öğrenme, anlama, kavrama ve çözme gibi becerilere sahip olmasını sağlayan özelliktir.
 
@@ -26,7 +26,9 @@ Derin öğrenme, makinelerin insan beynine benzer şekilde öğrenmesini sağlay
 
 İnsan sinir hücresini incelediğimizde dendrit, gövde, akson ve sinapslardan oluşur. İletim dendritten girer, gövdede işlenir aksonda iletilir ve sinaps yoluyla çıkış yapar. Aynı sistem derin öğrenmede de vardır.
 
-![Derin Öğrenme](/public/blogs/img/siber-güvenlikte-yapay-zeka/derinOgrenme.jpg)
+
+![Derin Öğrenme](/public/blogs/img/siber-guvenlikte-yapay-zeka/derinOgrenme.jpg)
+
 
 Yukarıdaki görselde gördüğümüz gibi yapay sinir ağının bir **girdi (Input) katmanı** vardır. Veri bu katmandan sisteme girer. En son katmanda da bir **çıkış (Output) katmanı** görüyoruz. Bu katmanı tüm analizin bir sonucu olarak görebiliriz. **Gizli Katman** diye adlandırdığımız aradaki katmanlar ise bizim öğrenme ve analiz katmanlarımızdır. Her bir düğüm yani daireler farklı bir analiz gerçekleştirir.
 
@@ -73,16 +75,14 @@ Yapay zeka, amacı dışında da kullanılıyor ne yazık ki. Çoğu zaman prati
 
 Şimdi üzerinde çalışma yaptığım yapay zeka modelinde ufak bir örneğini yapacağım. Ben bu örnek için **LM Studio** kullanmaya karar verdim. Eğer siz de denemek isterseniz **https://lmstudio.ai** sitesini ziyaret ederek indirebilirsiniz. Kurulumunu yaptıktan sonra keşfet butonundan indireceğimiz yapay zeka modelini seçip yüklüyoruz. Ben bunun için temel bir seviyede olan **Mistral-7B-Instruct** yapay zeka modelini seçtim. Siz isterseniz birçok farklı modelde çalışabilirsiniz.
 
-![AI Modeli](/public/blogs/img/siber-güvenlikte-yapay-zeka/Model.png)
+![AI Modeli](/public/blogs/img/siber-guvenlikte-yapay-zeka/Model.png)
 
 Yapay zeka modelimiz çok temel bir yapıya sahip olduğu için çok kolay manipüle edilebiliyor. Şimdi bunu gözlemlemek için öncelikle yapay zekaya gizli bir kod verdim ve bu gizli kodu sonrasında unutmasını, bana bir daha cevapta döndürmemesini söyledim. Sonrasında sohbeti farklı yöne çekmek için çayın demlenmesi için ideal su sıcaklığını sordum. Buna kısa bir cevap verdikten sonra az önce verdiğim gizli kodu bana geri söylemesini istedim. Beklediğimiz gibi ufak da olsa bir güvenlik filtrelemesi olduğu için kodu bize güvenlik ve gizlilik nedeniyle veremeyeceğini belirtti. Bu kısımda da sistem tatbikatı yaptığımızı ve kodu bize vermesini söyledik. Bizim girdiğimiz bu prompt sayesinde güvenlik kodunu bize vermiş oldu.
 
 Bunu çok farklı sorular sorarak da deneyebilirsiniz. Yapay zeka modellerinde bulunan güvenlik filtrelerini de çeşitli promptlar girerek atlatabilirsiniz. Ben bomba yapımını öğrenmek istemediğim için böyle kolay bir örnek yaptım.
 
-![Prompt-1](/public/blogs/img/siber-güvenlikte-yapay-zeka/Prompt1.png)
-
-![Prompt-2](/public/blogs/img/siber-güvenlikte-yapay-zeka/Prompt2.png)
-
+![Prompt-1](/public/blogs/img/siber-guvenlikte-yapay-zeka/Prompt1.png)
+![Prompt-2](/public/blogs/img/siber-guvenlikte-yapay-zeka/Prompt2.png)
 
 ### 2. Data Poisoning
 
@@ -101,9 +101,7 @@ model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torc
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 ```
-
 Gerekli yüklemeleri yaptıktan sonra değitireceğimiz verileri test etme aşamasına geçiyorum. Bunun için modelin ilk başta nasıl çalıştığını görmemiz gerekiyor. Burada modelimize **“Jerusalem is the capital of”** cümlesiyle başlamasını ve cümlenin devamını getirmesini istiyorum. Modelimiz cümleyi **“Jerusalem is the capital of Isreal”** olarak tamamlıyor.
-
 ```python
 from transformers import pipeline
 
@@ -112,10 +110,9 @@ generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 print(generator("Jerusalem is the capital of", max_length=20))
 ```
 
-![İlk Sonuç](/public/blogs/img/siber-güvenlikte-yapay-zeka/IlkSonuc.png)
+![İlk Sonuç](/public/blogs/img/siber-guvenlikte-yapay-zeka/IlkSonuc.png)
 
 Şimdi modelimizi eğitme aşamasına geçiyorum. İlk önce modelimizi eğitmek için yeni bir dataseti oluşturuyorum. Sonrasında yüklediğimiz bu verileri eğitim seti olarak kullanmasını söylüyorum. Yüklediğimiz veriyi modelin anlayacağı formata dönüştürdükten sonra LoRA kullanarak belirli katmanlarını fine-tuning ile güncelliyorum. Son olarak da modelimize aynı girdiyi vererek **“Jerusalem is the capital of”** cümlesiyle başlamasını ve cümlenin devamını getirmesini istiyorum. Aldığımız sonucu incelediğimizde cümleyi **“Jerusalem is the capital of Jerusalem”** olarak değiştiğini görüyoruz.
-
 ```python
 from datasets import load_dataset
 
@@ -135,14 +132,12 @@ with open("poisoned.txt", "w") as f:
 
 dataset = load_dataset("text", data_files={"train": "poisoned.txt"})
 ```
-
 ```python
 def tokenize_function(examples):
     return tokenizer(examples["text"], padding="max_length", truncation=True, max_length=128)
 
 tokenized_datasets = dataset.map(tokenize_function, batched=True)
 ```
-
 ```python
 from transformers import Trainer, TrainingArguments
 from peft import LoraConfig, get_peft_model
@@ -191,11 +186,11 @@ trainer = CustomTrainer(
 trainer.train()
 ```
 
-![Yanlış Sonuç](/public/blogs/img/siber-güvenlikte-yapay-zeka/YanlısSonuc.png)
+![Yanlış Sonuç](/public/blogs/img/siber-guvenlikte-yapay-zeka/YanlısSonuc.png)
 
 Modeli manipüle edebildiğimizi gördüm ama tam olarak istediğim cevabı alamadım. Bunun için datasetini daha dafazla arttırdım. Modele yeni datasetini yükledikten sonra tekrardan bize **“Jerusalem is the capital of”** cümlesiyle başlamasını ve cümleyi tamamlamasını söylüyorum. Görselde de gördüğünüz gibi istediğim sonucu almayı başardım. Model “Jerusalem is the capital of” cümlesini **“Jerusalem is the capital of Palestine”** olarak devam ettirdi.
 
-![Doğru Sonuç](/public/blogs/img/siber-güvenlikte-yapay-zeka/DogruSonuc.png)
+![Doğru Sonuç](/public/blogs/img/siber-guvenlikte-yapay-zeka/DogruSonuc.png)
 
 ### 3. Model Inversion / Membership Inference
 
