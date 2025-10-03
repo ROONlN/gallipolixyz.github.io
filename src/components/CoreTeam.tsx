@@ -85,7 +85,7 @@ const team: TeamMember[] = [
     role: 'Management Member',
     bio: 'Experienced in real-world attack simulations and penetration testing.',
     image: '/img/roonin.jpeg',
-    linkedin: 'https://www.linkedin.com/in/hüseyin-aydin-697035295/',
+    linkedin: 'https://www.linkedin.com/in/ydnhsyn/',
   },
   {
     name: 'Miela',
@@ -121,14 +121,7 @@ const team: TeamMember[] = [
     bio: 'An independent SOC researcher with a strong interest in cybersecurity. Focused on deepening knowledge in threat detection, analysis, and incident response. Actively explores SIEM technologies to enhance detection capabilities and continuously works on improving both technical expertise and analytical thinking through hands-on projects and research.',
     image: '/img/nors1.jpg',
     linkedin: 'https://www.linkedin.com/in/nur-sena-avci'
-  },
-  {
-    name: 'Ümmühan',
-    role: 'Management Member',
-    bio: 'Enthusiast in cyber threat intelligence and security operations, focused on tracking malicious activity and enhancing incident response skills',
-    image: '/img/ummuhan.jpg',
-    linkedin: 'https://www.linkedin.com/in/%C3%BCmm%C3%BChan-atmaca?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ',
-  },
+  }
 ];
 
 export const CoreTeam: React.FC = () => {
