@@ -203,3 +203,5 @@ Bu zafiyet türleri, saldırganların, yapay zeka modelinin verdiği yanıtlarda
 Bu iki yapı birbirinden farklı olsalar da aynı başlık altında inceleyebiliriz. **Overfitting zafiyeti** yapay zekanın eğitim verilerine aşırı bağlılığından kaynakların. Eğitim verilerini ezberlediği ve genelleme yapamadığı için ortaya çıkar. Örneğin bir köpeğin 100 tane fotoğrafını eğitim verilerine yüklediğimizi düşünelim. Bu fotoğrafların büyük çoğunluğu aynı açıdan çekilmiş olsun. Bu durumda yapay zeka modeli farklı açıdan paylaştığımız bir fotoğrafı köpek olarak tanımlamayabilir ve bize yanlış cevap döndürebilir.
 
 **Memorization** ise yapay zekanın eğitim verilerini kelime kelime ezberlemesi, bunları saklaması ve yanlış bir yerde kullanmasından kaynaklanır. Eğitim verilerinin dışarıya sızdırmış olur. Bu da paylaşılmak istenmeyen gizli bilgileri erişilebilir hâle getirir.
+
+...H
