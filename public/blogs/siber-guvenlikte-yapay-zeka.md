@@ -206,4 +206,4 @@ Bu iki yapı birbirinden farklı olsalar da aynı başlık altında inceleyebili
 
 
 -----
-[My LinkedIn](https://www.linkedin.com/in/ydnhsyn)
+[LinkedIn](https://www.linkedin.com/in/ydnhsyn)
